@@ -44,10 +44,6 @@ public class DataHelper {
         return new NumberCard("5559 0000 0000 0000");
     }
 
-    @Value
-    public static class Amount {
-        private int amount;
-    }
 
 }
 
