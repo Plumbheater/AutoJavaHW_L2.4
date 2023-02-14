@@ -10,11 +10,11 @@ public class VerificationPage {
 
 
 
-    public VerificationPage verification(DataHelper.VerificationCode codeVerification) {
+    public DashboardPage verification(DataHelper.VerificationCode codeVerification) {
 
         code.setValue(Integer.toString(codeVerification.getCode()));
         verificationButton.click();
 
-        return new VerificationPage();
+        return new DashboardPage();
     }
 }
