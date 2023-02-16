@@ -15,18 +15,10 @@ public class BalanceTransferPage {
 
     private SelenideElement error = $("[data-test-id = error-notification]");
 
-    public DashboardPage transferBalance(DataHelper.NumberCard card, int sum) {
+    public void incomingData(DataHelper.NumberCard card, int sum) {
         amount.setValue(Integer.toString(sum));
         cards.setValue(card.getCard());
         transButton.click();
-        return new DashboardPage();
-    }
-
-    public BalanceTransferPage transBalanceError(DataHelper.NumberCard card, int sum) {
-        amount.setValue(Integer.toString(sum));
-        cards.setValue(card.getCard());
-        transButton.click();
-        return new BalanceTransferPage();
     }
 
     public void error() {
@@ -34,5 +26,9 @@ public class BalanceTransferPage {
                 "Ошибка! Произошла ошибка"), visible);
     }
 
+    public DashboardPage transBalance(DataHelper.NumberCard card, int sum) {
+        incomingData(card, sum);
+        return new DashboardPage();
+    }
 }
 

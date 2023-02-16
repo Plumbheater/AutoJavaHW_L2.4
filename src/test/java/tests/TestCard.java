@@ -28,29 +28,30 @@ public class TestCard {
     void minTransferFrom2to1Card() {
         int sum = 0;
         val dashboard = new DashboardPage();
-        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(dashboard.balanceCard1);
-        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(dashboard.balanceCard2);
-        val clickButtonTrans = dashboard.pageDashboard(dashboard.deposit1);
+        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(DataHelper.getNumberCard1());
+        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(DataHelper.getNumberCard2());
+        val clickButtonTrans = dashboard.buttonFirstDeposit();
         val balanceTransferPage = new BalanceTransferPage();
         val card = DataHelper.getNumberCard2();
-        val balanceTransfer = balanceTransferPage.transferBalance(card, sum);
-        Assertions.assertEquals(balanceOfCardBefore1 + sum, dashboard.getBalanceOfCard(dashboard.balanceCard1));
-        Assertions.assertEquals(balanceOfCardBefore2 - sum, dashboard.getBalanceOfCard(dashboard.balanceCard2));
+        val balanceTransfer = balanceTransferPage.transBalance(card, sum);
+        Assertions.assertEquals(balanceOfCardBefore1 + sum, dashboard.getBalanceOfCard(DataHelper.getNumberCard1()));
+        Assertions.assertEquals(balanceOfCardBefore2 - sum, dashboard.getBalanceOfCard(DataHelper.getNumberCard2()));
     }
+
 
     @Test
     @DisplayName("Перевод всей суммы со 2ой карты на 1ю")
     void maxTransferFrom2to1Card() {
         int sum = 10000;
         val dashboard = new DashboardPage();
-        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(dashboard.balanceCard1);
-        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(dashboard.balanceCard2);
-        val clickButtonTrans = dashboard.pageDashboard(dashboard.deposit1);
+        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(DataHelper.getNumberCard1());
+        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(DataHelper.getNumberCard2());
+        val clickButtonTrans = dashboard.buttonFirstDeposit();
         val balanceTransferPage = new BalanceTransferPage();
         val card = DataHelper.getNumberCard2();
-        val balanceTransfer = balanceTransferPage.transferBalance(card, sum);
-        Assertions.assertEquals(balanceOfCardBefore1 + sum, dashboard.getBalanceOfCard(dashboard.balanceCard1));
-        Assertions.assertEquals(balanceOfCardBefore2 - sum, dashboard.getBalanceOfCard(dashboard.balanceCard2));
+        val balanceTransfer = balanceTransferPage.transBalance(card, sum);
+        Assertions.assertEquals(balanceOfCardBefore1 + sum, dashboard.getBalanceOfCard(DataHelper.getNumberCard1()));
+        Assertions.assertEquals(balanceOfCardBefore2 - sum, dashboard.getBalanceOfCard(DataHelper.getNumberCard2()));
     }
 
     @Test
@@ -58,14 +59,14 @@ public class TestCard {
     void minTransferFrom1to2Card() {
         int sum = 0;
         val dashboard = new DashboardPage();
-        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(dashboard.balanceCard1);
-        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(dashboard.balanceCard2);
-        val clickButtonTrans = dashboard.pageDashboard(dashboard.deposit2);
+        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(DataHelper.getNumberCard1());
+        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(DataHelper.getNumberCard2());
+        val clickButtonTrans = dashboard.buttonSecondDeposit();
         val balanceTransferPage = new BalanceTransferPage();
         val card = DataHelper.getNumberCard1();
-        val balanceTransfer = balanceTransferPage.transferBalance(card, sum);
-        Assertions.assertEquals(balanceOfCardBefore2 + sum, dashboard.getBalanceOfCard(dashboard.balanceCard2));
-        Assertions.assertEquals(balanceOfCardBefore1 - sum, dashboard.getBalanceOfCard(dashboard.balanceCard1));
+        val balanceTransfer = balanceTransferPage.transBalance(card, sum);
+        Assertions.assertEquals(balanceOfCardBefore2 + sum, dashboard.getBalanceOfCard(DataHelper.getNumberCard2()));
+        Assertions.assertEquals(balanceOfCardBefore1 - sum, dashboard.getBalanceOfCard(DataHelper.getNumberCard1()));
     }
 
 
@@ -74,14 +75,14 @@ public class TestCard {
     void maxTransferFrom1to2Card() {
         int sum = 10000;
         val dashboard = new DashboardPage();
-        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(dashboard.balanceCard1);
-        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(dashboard.balanceCard2);
-        val clickButtonTrans = dashboard.pageDashboard(dashboard.deposit2);
+        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(DataHelper.getNumberCard1());
+        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(DataHelper.getNumberCard2());
+        val clickButtonTrans = dashboard.buttonSecondDeposit();
         val balanceTransferPage = new BalanceTransferPage();
         val card = DataHelper.getNumberCard1();
-        val balanceTransfer = balanceTransferPage.transferBalance(card, sum);
-        Assertions.assertEquals(balanceOfCardBefore2 + sum, dashboard.getBalanceOfCard(dashboard.balanceCard2));
-        Assertions.assertEquals(balanceOfCardBefore1 - sum, dashboard.getBalanceOfCard(dashboard.balanceCard1));
+        val balanceTransfer = balanceTransferPage.transBalance(card, sum);
+        Assertions.assertEquals(balanceOfCardBefore2 + sum, dashboard.getBalanceOfCard(DataHelper.getNumberCard2()));
+        Assertions.assertEquals(balanceOfCardBefore1 - sum, dashboard.getBalanceOfCard(DataHelper.getNumberCard1()));
     }
 
     @Test
@@ -90,10 +91,11 @@ public class TestCard {
         int sum = 0;
         val dashboard = new DashboardPage();
         val balanceTransferPage = new BalanceTransferPage();
-        val clickButtonTrans = dashboard.pageDashboard(dashboard.deposit1);
+        val clickButtonTrans = dashboard.buttonFirstDeposit();
         val card = DataHelper.getNumberCard3();
-        val balanceTransfer = balanceTransferPage.transBalanceError(card, sum);
+        balanceTransferPage.incomingData(card, sum);
         balanceTransferPage.error();
+
     }
 
     @Test
@@ -102,9 +104,9 @@ public class TestCard {
         int sum = 10000;
         val dashboard = new DashboardPage();
         val balanceTransferPage = new BalanceTransferPage();
-        val clickButtonTrans = dashboard.pageDashboard(dashboard.deposit1);
+        val clickButtonTrans = dashboard.buttonFirstDeposit();
         val card = DataHelper.getNumberCard3();
-        val balanceTransfer = balanceTransferPage.transBalanceError(card, sum);
+        balanceTransferPage.incomingData(card, sum);
         balanceTransferPage.error();
     }
 
@@ -114,9 +116,9 @@ public class TestCard {
         int sum = 0;
         val dashboard = new DashboardPage();
         val balanceTransferPage = new BalanceTransferPage();
-        val clickButtonTrans = dashboard.pageDashboard(dashboard.deposit2);
+        val clickButtonTrans = dashboard.buttonSecondDeposit();
         val card = DataHelper.getNumberCard3();
-        val balanceTransfer = balanceTransferPage.transBalanceError(card, sum);
+        balanceTransferPage.incomingData(card, sum);
         balanceTransferPage.error();
     }
 
@@ -126,9 +128,9 @@ public class TestCard {
         int sum = 10000;
         val dashboard = new DashboardPage();
         val balanceTransferPage = new BalanceTransferPage();
-        val clickButtonTrans = dashboard.pageDashboard(dashboard.deposit2);
+        val clickButtonTrans = dashboard.buttonSecondDeposit();
         val card = DataHelper.getNumberCard3();
-        val balanceTransfer = balanceTransferPage.transBalanceError(card, sum);
+        balanceTransferPage.incomingData(card, sum);
         balanceTransferPage.error();
     }
 
@@ -137,12 +139,12 @@ public class TestCard {
     void highTransferFrom2to1Card() {
         int sum = 10001;
         val dashboard = new DashboardPage();
-        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(dashboard.balanceCard1);
-        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(dashboard.balanceCard2);
-        val clickButtonTrans = dashboard.pageDashboard(dashboard.deposit1);
+        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(DataHelper.getNumberCard1());
+        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(DataHelper.getNumberCard2());
+        val clickButtonTrans = dashboard.buttonFirstDeposit();
         val balanceTransferPage = new BalanceTransferPage();
         val card = DataHelper.getNumberCard2();
-        val balanceTransfer = balanceTransferPage.transBalanceError(card, sum);
+        balanceTransferPage.incomingData(card, sum);
         balanceTransferPage.error();
     }
 
@@ -151,12 +153,12 @@ public class TestCard {
     void highTransferFrom1to2Card() {
         int sum = 10001;
         val dashboard = new DashboardPage();
-        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(dashboard.balanceCard1);
-        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(dashboard.balanceCard2);
-        val clickButtonTrans = dashboard.pageDashboard(dashboard.deposit2);
+        val balanceOfCardBefore1 = dashboard.getBalanceOfCard(DataHelper.getNumberCard1());
+        val balanceOfCardBefore2 = dashboard.getBalanceOfCard(DataHelper.getNumberCard2());
+        val clickButtonTrans = dashboard.buttonSecondDeposit();
         val balanceTransferPage = new BalanceTransferPage();
         val card = DataHelper.getNumberCard1();
-        val balanceTransfer = balanceTransferPage.transBalanceError(card, sum);
+        balanceTransferPage.incomingData(card, sum);
         balanceTransferPage.error();
     }
 }
